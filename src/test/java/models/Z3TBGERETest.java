@@ -1,0 +1,146 @@
+package models;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class Z3TBGERETest {
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
+//    @Test
+//    public void testMethod() {
+//        Z3TBGERE instance = new Z3TBGERE();
+//        instance.setData_var_tp(null);
+//        instance.setProven_rich("");
+//        instance.setData_estin(null);
+//        instance.setFiliale("");
+//        instance.setData_var_batch(null);
+//        instance.setData_rifacim(null);
+//        instance.setLocalizzazione("");
+//        instance.setId_sogg_tito(0L);
+//        instance.setStato_ente("");
+//        instance.setData_rich(null);
+//        instance.setCin_conto_proven("");
+//        instance.setData_invio_service(null);
+//        instance.setData_consegna(null);
+//        instance.setData_revoca(null);
+//        instance.setData_scad(null);
+//        instance.setData_sbloc(null);
+//        instance.setCod_plico_disp("");
+//        instance.setId_sogg_posi(0L);
+//        instance.setCod_divisa_conto("");
+//        instance.setStato_tp("");
+//        instance.setMotivo_stato_ente("");
+//        instance.setDiv_conto_proven("");
+//        instance.setTipo_disp_cod_est("");
+//        instance.setData_emissione(null);
+//        instance.setOra_var(null);
+//        instance.setCod_sia_azi("");
+//        instance.setData_rinuncia(null);
+//        instance.setCab_tp("");
+//        instance.setCateg_conto_proven("");
+//        instance.setData_bloc(null);
+//        instance.setCin_cod_est_disp("");
+//        instance.setCod_esterno_disp("");
+//        instance.setTipo_conto("");
+//        instance.setGrado_disp("");
+//        instance.setIntest_disp_3("");
+//        instance.setId_prod_cli(0L);
+//        instance.setIntest_disp_2("");
+//        instance.setIntest_disp_1("");
+//        instance.setRelease_prod(0);
+//        instance.setProg_agg(0);
+//        instance.setTipo_conto_proven("");
+//        instance.setConto_proven("");
+//        instance.setData_rispo_service(null);
+//        instance.setCod_agenzia("");
+//        instance.setTerm_var("");
+//        instance.setCin_conto("");
+//        instance.setCod_prod("");
+//        instance.setTipo_conto("");
+//        instance.setMotivo_stato_tp("");
+//        instance.setNatura_supp("");
+//        instance.setCirc_pref("");
+//        instance.setData_rinnovo(null);
+//        instance.setFiliale_proven("");
+//        instance.setPk(null);
+//        instance.setData_stato_tp(null);
+//        instance.setOperaz_origine("");
+//        instance.setData_stato_ente(null);
+//        instance.setConvenzione("");
+//        instance.setCanale_vendita("");
+//        instance.setCateg_conto("");
+//        instance.setData_non_rinnovo(null);
+//        instance.setId_reale_origine(0);
+//        instance.setUte_var("");
+//        instance.setFlag_invio("");
+//        assertEquals(null, instance.getData_var_tp());
+//        assertEquals("", instance.getProven_rich());
+//        assertEquals(null, instance.getData_estin());
+//        assertEquals("", instance.getFiliale());
+//        assertEquals(null, instance.getData_var_batch());
+//        assertEquals(null, instance.getData_rifacim());
+//        assertEquals("", instance.getLocalizzazione());
+//        assertEquals(0L, instance.getId_sogg_tito());
+//        assertEquals("", instance.getStato_ente());
+//        assertEquals(null, instance.getData_rich());
+//        assertEquals("", instance.getCin_conto_proven());
+//        assertEquals(null, instance.getData_invio_service());
+//        assertEquals(null, instance.getData_consegna());
+//        assertEquals(null, instance.getData_revoca());
+//        assertEquals(null, instance.getData_scad());
+//        assertEquals(null, instance.getData_sbloc());
+//        assertEquals("", instance.getCod_plico_disp());
+//        assertEquals(0L, instance.getId_sogg_posi());
+//        assertEquals("", instance.getCod_divisa_conto());
+//        assertEquals("", instance.getStato_tp());
+//        assertEquals("", instance.getMotivo_stato_ente());
+//        assertEquals("", instance.getDiv_conto_proven());
+//        assertEquals("", instance.getTipo_disp_cod_est());
+//        assertEquals(null, instance.getData_emissione());
+//        assertEquals(null, instance.getOra_var());
+//        assertEquals("", instance.getCod_sia_azi());
+//        assertEquals(null, instance.getData_rinuncia());
+//        assertEquals("", instance.getCab_tp());
+//        assertEquals("", instance.getCateg_conto_proven());
+//        assertEquals(null, instance.getData_bloc());
+//        assertEquals("", instance.getCin_cod_est_disp());
+//        assertEquals("", instance.getCod_esterno_disp());
+//        assertEquals("", instance.getConto());
+//        assertEquals("", instance.getGrado_disp());
+//        assertEquals("", instance.getIntest_disp_3());
+//        assertEquals(0L, instance.getId_prod_cli());
+//        assertEquals("", instance.getIntest_disp_2());
+//        assertEquals("", instance.getIntest_disp_1());
+//        assertEquals(0, instance.getRelease_prod());
+//        assertEquals(0, instance.getProg_agg());
+//        assertEquals("", instance.getTipo_conto_proven());
+//        assertEquals("", instance.getConto_proven());
+//        assertEquals(null, instance.getData_rispo_service());
+//        assertEquals("", instance.getCod_agenzia());
+//        assertEquals("", instance.getTerm_var());
+//        assertEquals("", instance.getCin_conto());
+//        assertEquals("", instance.getCod_prod());
+//        assertEquals("", instance.getTipo_conto());
+//        assertEquals("", instance.getMotivo_stato_tp());
+//        assertEquals("", instance.getNatura_supp());
+//        assertEquals("", instance.getCirc_pref());
+//        assertEquals(null, instance.getData_rinnovo());
+//        assertEquals("", instance.getFiliale_proven());
+//        assertEquals(null, instance.getPk());
+//        assertEquals(null, instance.getData_stato_tp());
+//        assertEquals("", instance.getOperaz_origine());
+//        assertEquals(null, instance.getData_stato_ente());
+//        assertEquals("", instance.getConvenzione());
+//        assertEquals("", instance.getCanale_vendita());
+//        assertEquals("", instance.getCateg_conto());
+//        assertEquals(null, instance.getData_non_rinnovo());
+//        assertEquals(0, instance.getId_reale_origine());
+//        assertEquals("", instance.getUte_var());
+//        assertEquals("", instance.getFlag_invio());
+//    }
+}

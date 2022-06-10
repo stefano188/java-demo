@@ -20,52 +20,20 @@ public class ObjectUtils {
 
     private static final String INSTANCE_VAR_NAME = "instance";
 
-    public static <T> List<Field> loadDeclaredFields(T instanceOfClass) {
+    private static <T> List<Field> loadDeclaredFields(T instanceOfClass) {
         return Arrays.asList(toClass(instanceOfClass).getDeclaredFields());
     }
 
-    public static <T> List<Method> loadDeclaredMethods(T instanceOfClass) {
-//        return instanceOfClass instanceof Class
-//                ? Arrays.asList(((Class<?>) instanceOfClass).getDeclaredMethods())
-//                : Arrays.asList(instanceOfClass.getClass().getDeclaredMethods());
+    private static <T> List<Method> loadDeclaredMethods(T instanceOfClass) {
         return Arrays.asList(toClass(instanceOfClass).getDeclaredMethods());
     }
-
-//    public static <T> Map<Field, Method> loadFieldSetterMethodMap(T instanceOfClass) {
-//        Map<Field, Method> fieldMethodMap = new HashMap<>();
-//
-//        List<Method> setterMethods = filterSetterMethods(instanceOfClass).collect(Collectors.toList());
-//        loadDeclaredFields(instanceOfClass).stream().map(f -> {
-//            Optional<Method> found = setterMethods.stream()
-//                .filter(m -> m.getName().toLowerCase().endsWith(f.getName().toLowerCase())).findFirst();
-//                    return found.map(method -> new AbstractMap.SimpleEntry<>(f, method)).orElse(null);
-//            }).filter(Objects::nonNull).collect(Collectors.toList())
-//            .forEach(e -> fieldMethodMap.put(e.getKey(), e.getValue()));
-//
-//        return fieldMethodMap;
-//    }
-//
-//    public static <T> Map<Field, Method> loadFieldGetterMethodMap(T instanceOfClass) {
-//        Map<Field, Method> fieldMethodMap = new HashMap<>();
-//
-//        List<Method> getterMethods = filterGetterMethods(instanceOfClass).collect(Collectors.toList());
-//        loadDeclaredFields(instanceOfClass).stream().map(f -> {
-//            Optional<Method> found = getterMethods.stream()
-//                .filter(m -> m.getName().toLowerCase().endsWith(f.getName().toLowerCase())).findFirst();
-//                    return found.map(method -> new AbstractMap.SimpleEntry<>(f, method)).orElse(null);
-//                }).filter(Objects::nonNull).collect(Collectors.toList())
-//                .forEach(e -> fieldMethodMap.put(e.getKey(), e.getValue()));
-//
-//        return fieldMethodMap;
-//    }
 
     public static <T> Map<Field, Method> loadFieldMethodMap(T instanceOfClass, List<Method> methodList) {
         Map<Field, Method> fieldMethodMap = new HashMap<>();
 
-//        List<Method> setterMethods = filterSetterMethods(instanceOfClass).collect(Collectors.toList());
         loadDeclaredFields(instanceOfClass).stream().map(f -> {
                     Optional<Method> found = methodList.stream()
-                            .filter(m -> m.getName().toLowerCase().endsWith(f.getName().toLowerCase())).findFirst();
+                            .filter(m -> getMethodNameSkippingSetOrGet(m.getName().toLowerCase()).equals(f.getName().toLowerCase())).findFirst();
                     return found.map(method -> new AbstractMap.SimpleEntry<>(f, method)).orElse(null);
                 }).filter(Objects::nonNull).collect(Collectors.toList())
                 .forEach(e -> fieldMethodMap.put(e.getKey(), e.getValue()));
@@ -99,7 +67,7 @@ public class ObjectUtils {
         loadFieldMethodMap(instanceOfClass, filterSetterMethods(instanceOfClass).collect(Collectors.toList()))
             .forEach((k, v) -> {
                 try {
-                    String typeName = toClass.getDeclaredField(k.getName()).getType().getName();
+                    String typeName = getTypeName(toClass.getDeclaredField(k.getName()).getType().getName());
                     String stmt = INSTANCE_VAR_NAME+"."+v.getName()+"("+valueByType(typeName)+");";
 
                     methods.add(stmt);
@@ -111,7 +79,7 @@ public class ObjectUtils {
         loadFieldMethodMap(instanceOfClass, filterGetterMethods(instanceOfClass).collect(Collectors.toList()))
                 .forEach((k, v) -> {
                     try {
-                        String typeName = toClass.getDeclaredField(k.getName()).getType().getName();
+                        String typeName = getTypeName(toClass.getDeclaredField(k.getName()).getType().getName());
                         String expectedVal = valueByType(typeName);
                         String stmt = "assertEquals("+expectedVal+", " + INSTANCE_VAR_NAME+"."+v.getName()+"());";
 
@@ -139,6 +107,15 @@ public class ObjectUtils {
         int idx = str.lastIndexOf(".");
         int i = idx == -1 ? 0 : idx + 1;
         return str.substring(i);
+    }
+
+    private static String getMethodNameSkippingSetOrGet(String methodName) {
+        return methodName != null && methodName.length() > 3 ? methodName.substring(3) : methodName;
+    }
+
+    private static String getTypeName(String typePackagePath) {
+        int lastIndex = typePackagePath.lastIndexOf(".");
+        return lastIndex != -1 ? typePackagePath.substring(lastIndex + 1) : typePackagePath;
     }
 
     private static String valueByType(String type) {
@@ -184,11 +161,4 @@ public class ObjectUtils {
         }
     }
 
-//    public static void main() {
-//        SampleClass sampleClass = new SampleClass();
-//        ObjectUtils.filterGetterMethods(sampleClass).map(m -> {
-//            System.out.println(m.getName());
-//            return m.getName();
-//        }).collect(Collectors.toList());
-//    }
 }

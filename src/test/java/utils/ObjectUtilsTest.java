@@ -10,6 +10,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import models.Z3TBGERE;
+
 public class ObjectUtilsTest {
 
     @Before
@@ -19,13 +21,13 @@ public class ObjectUtilsTest {
     @Test
     public void testGetterMethods() {
 //        System.out.println(ObjectUtils.generateSetterGetter(SampleClass.class));
-        ObjectUtils.generateSetterGetterPrint(SampleClass.class);
+        ObjectUtils.generateSetterGetterPrint(Z3TBGERE.class);
 
-        List<String> methodByInstance = testPrintGetterSetterMethods(new SampleClass());
-        System.out.println(methodByInstance);
-
-        List<String> methodByClass = testPrintGetterSetterMethods(SampleClass.class);
-        System.out.println(methodByClass);
+//        List<String> methodByInstance = testPrintGetterSetterMethods(new SampleClass());
+//        System.out.println(methodByInstance);
+//
+//        List<String> methodByClass = testPrintGetterSetterMethods(SampleClass.class);
+//        System.out.println(methodByClass);
 
 //        ObjectUtils.loadFieldSetterMethodMap(SampleClass.class)
 //                .forEach((k, v) -> System.out.println(k.getName() + " - " + v.getName()));

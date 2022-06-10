@@ -11,6 +11,8 @@ public class SampleClass {
     private Integer integerVal;
     private String strVal = "aString";
     private String strVal2;
+    private String b_strVal;
+    private String c_strVal;
 
     private FirstChildClass firstChild;
 
@@ -68,6 +70,14 @@ public class SampleClass {
 
     public void setBoolVal(boolean boolVal) {
         this.boolVal = boolVal;
+    }
+
+    public String getC_strVal() {
+        return c_strVal;
+    }
+
+    public void setC_strVal(String c_strVal) {
+        this.c_strVal = c_strVal;
     }
 
     public FirstChildClass getFirstChild() {
